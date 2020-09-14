@@ -1,21 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+import 'react-native-gesture-handler';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import React from 'react';
+import { StyleSheet, Text, View, TextInput, Image } from 'react-native';
+import Main from './main';
+import editName from "./components/screen_comps/editName"
+import editPhone from "./components/screen_comps/editPhone"
+import editEmail from "./components/screen_comps/editEmail"
+import editDesc from "./components/screen_comps/editDesc"
+import {Provider} from 'react-redux'
+import configStore from "./src/store"
+
+
+  const store = configStore()
+  const App = () => {
+    const Stack = createStackNavigator();
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Main" component={Main} options={{headerShown: false}} navigation={Stack.Navigator.navigation}/>
+        <Stack.Screen name='Name' component={editName} options={{headerShown: false}} navigation={Stack.Navigator.navigation}/>
+        <Stack.Screen name='Phone' component={editPhone} options={{headerShown: false}} navigation={Stack.Navigator.navigation}/>
+        <Stack.Screen name='Email' component={editEmail} options={{headerShown: false}} navigation={Stack.Navigator.navigation}/>
+        <Stack.Screen name='Desc' component={editDesc} options={{headerShown: false}} navigation={Stack.Navigator.navigation}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+    </Provider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+
+
+export default App;
+
+
