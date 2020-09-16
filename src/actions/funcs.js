@@ -1,5 +1,5 @@
 import { faPhone } from "@fortawesome/free-solid-svg-icons"
-import {CHANGE_NAME, CHANGE_PHONE, CHANGE_EMAIL, CHANGE_DESC} from "../actions/types"
+import {CHANGE_NAME, CHANGE_PHONE, CHANGE_EMAIL, CHANGE_DESC, CHANGE_IMG} from "../actions/types"
 
 export const changeName = (info) =>({
     type: CHANGE_NAME,
@@ -19,5 +19,10 @@ export const changeEmail = (info) =>({
 
 export const changeDesc = (info) =>({
     type: CHANGE_DESC,
+    data: info
+})
+
+export const changeImg = (info) =>({
+    type: CHANGE_IMG,
     data: info
 })

@@ -2,12 +2,16 @@
 import 'react-native-gesture-handler';
 
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Image, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Image, SafeAreaView} from 'react-native';
+import profPic from "./assets/profile_pic.jpg"
 import MainName from './components/mainName';
 import AppPhone from './components/appPhone';
 import AppEmail from './components/appEmail';
 import AppDesc from './components/appDesc';
 import {connect} from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 
@@ -18,22 +22,40 @@ import {connect} from 'react-redux';
 
 
 const Main = (props) =>{
+  const [check, setCheck] = React.useState(props.items.image_uri)
 
+  const changeToImage = () =>{
+    props.navigation.navigate("Image")
+  }
+
+
+  React.useEffect(()=>{
+    console.log(check, props.items.image_uri)
+    if(props.items.image_uri !== false){
+      setCheck(true)
+    }
+  })
 
   return (
     
 
     
     <SafeAreaView style={styles.container}>
+      
       <Text style={{
         fontSize: 30,
         fontWeight: "700",
         color: "#446bd5",
-        paddingBottom: 15
+        paddingBottom: 15,
+        paddingTop: 40
       }}>Edit Profile</Text>
-      <View>
-        <Image style={styles.image} source={require('./assets/profile_pic.jpg')} />
-      </View>
+      <TouchableOpacity activeOpacity={1} onPress={changeToImage}>
+        {check === false ? <Image style={styles.image} source={profPic} /> : <Image style={styles.image} source={{uri: props.items.image_uri}}/>}
+        <View style={{position: "absolute", alignSelf: "flex-end", padding: 10, backgroundColor: "#fafafa", borderRadius: 100, marginRight: 20}}>
+        <FontAwesomeIcon size={32} color={"#446bd5"}  icon={faPencilAlt}/>
+        </View>
+        
+      </TouchableOpacity>
       <MainName styles={styles.infoContainer} txtStyle={styles.header} infoStyle={styles.text} carrotStyle={styles.carrot} infoCompStyle={styles.infoComp} navigation={props.navigation} string={props.items.name}/>
       <AppPhone  styles={styles.infoContainer} txtStyle={styles.header} infoStyle={styles.text} carrotStyle={styles.carrot} infoCompStyle={styles.infoComp} navigation={props.navigation} string={props.items.phone}/>
       <AppEmail  styles={styles.infoContainer} txtStyle={styles.header} infoStyle={styles.text} carrotStyle={styles.carrot} infoCompStyle={styles.infoComp} navigation={props.navigation} string={props.items.email}/>
@@ -63,8 +85,8 @@ const styles = StyleSheet.create({
     fontWeight: "700"
   },
   image:{
-    width: 150,
-    height: 150,
+    width: 175,
+    height: 175,
     borderWidth: 6,
     borderColor: "#446bd5",
     borderRadius: 100

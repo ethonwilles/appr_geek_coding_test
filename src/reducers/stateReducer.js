@@ -1,10 +1,11 @@
-import {CHANGE_NAME, CHANGE_PHONE, CHANGE_EMAIL, CHANGE_DESC} from "../actions/types"
+import {CHANGE_NAME, CHANGE_PHONE, CHANGE_EMAIL, CHANGE_DESC, CHANGE_IMG} from "../actions/types"
 
 const initialState = {
     name: "Micah Smith",
     phone: "801-691-2737",
     email: "ethonwilles@gmail.com",
-    desc: "THIS IS A DESCRIPTION"
+    desc: "THIS IS A DESCRIPTION",
+    image_uri: false
   }
 
 export const stateReducer = (state = initialState, action) =>{
@@ -36,6 +37,11 @@ export const stateReducer = (state = initialState, action) =>{
                 desc: action.data
             }
             )
+        case CHANGE_IMG:
+            return({
+                ...state, 
+                image_uri: action.data
+            })
                 
             
             
