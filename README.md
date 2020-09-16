@@ -1,6 +1,7 @@
 # Getting Started
 This React Native app was developed using Expo. You will need to install the expo cli to view this project.
 ### Run 
+#### *If the following command fails, try running it in an administrator shell.*
 ```shell
 npm install -g expo-cli
 ```
